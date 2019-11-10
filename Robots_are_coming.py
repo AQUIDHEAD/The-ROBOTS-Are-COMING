@@ -90,11 +90,21 @@ while running:
         elif event.type == pygame.KEYUP:
             playerX_change = 0
             playerY_change = 0
+    
+    
 
     # Player function is called
     
     playerY += playerY_change
     playerX += playerX_change
+    if playerX <= 0:
+        playerX = 0
+    elif playerX >= 936:
+        playerX = 936
+    elif playerY <= 0:
+        playerY = 0
+    elif playerY >= 586:
+        playerY = 586
     player(playerX,playerY)
 
     pygame.display.update()
