@@ -1,7 +1,9 @@
 # The Robots Are Coming bassed on Pygame library
 
 import pygame
+import random
 pygame.init()
+
 
 # Name of window and game
 
@@ -35,7 +37,17 @@ playerY_change = 0
 
 def player(x,y):
     screen.blit(playerImg,(x,y))
-    
+
+# Enemy
+
+enemyImg = pygame.image.load('shape.png')
+enemyX = random.randint(564,936)
+enemyY = random.randint(0,586)
+enemyX_change = 0
+enemyY_change = 0
+
+def enemy(x,y):
+    screen.blit(enemyImg,(x,y))
 
 # Game loop for events
 
@@ -105,6 +117,18 @@ while running:
         playerY = 0
     elif playerY >= 586:
         playerY = 586
+
+    enemyY += enemyY_change
+    enemyX += enemyX_change
+    if enemyX <= 0:
+        enemyX = 0
+    elif enemyX >= 936:
+        enemyX = 936
+    elif enemyY <= 0:
+        enemyY = 0
+    elif enemyY >= 586:
+        enemyY = 586
     player(playerX,playerY)
+    enemy(enemyX,enemyY)
 
     pygame.display.update()
