@@ -40,14 +40,22 @@ def player(x,y):
 
 # Enemy
 
-enemyImg = pygame.image.load('shape.png')
-enemyX = random.randint(564,936)
-enemyY = random.randint(0,586)
-enemyX_change = 0
-enemyY_change = 0
+enemyImg = []
+enemyX = []
+enemyY = []
+enemyX_change = []
+enemyY_change = []
+num_of_enemies = 2
+
+for i in range(num_of_enemies):
+    enemyImg.append(pygame.image.load('shape.png'))
+    enemyX.append(random.randint(564,936))
+    enemyY.append(random.randint(0,586))
+    enemyX_change.append(0)
+    enemyY_change.append(0)
 
 def enemy(x,y):
-    screen.blit(enemyImg,(x,y))
+    screen.blit(enemyImg[i],(x,y))
 
 # Game loop for events
 
@@ -109,17 +117,30 @@ while running:
             playerY_change = 0
     
     # Enemy movement
+    for i in range(num_of_enemies):
+        # Y-axis movement
+        if playerY < enemyY[i]:
+            enemyY_change[i] = -1.25
+# TEST
+        elif playerX < enemyX[i]:
+            enemyX_change[i] = -1.25
 
-    # X-axis movement
-    if playerX < enemyX:
-        enemyX_change = -1.25
-    elif playerX > enemyX:
-        enemyX_change = 1.25
-    # Y-axis movement
-    elif playerY < enemyY:
-        enemyY_change = -1.25
-    elif playerY > enemyY:
-        enemyY_change = 1.25
+        elif playerY > enemyY[i]:
+            enemyY_change[i] = 1.25
+
+        # TEST
+        elif playerX > enemyX[i]:
+            enemyX_change[i] = 1.25
+        # X-axis movement
+      #  elif playerX < enemyX[i]:
+       #     enemyX_change[i] = -1.25
+       # elif playerX > enemyX[i]:
+       #     enemyX_change[i] = 1.25
+        # Y-axis movement
+        #elif playerY < enemyY[i]:
+        #    enemyY_change[i] = -1.25
+        #elif playerY > enemyY[i]:
+        #    enemyY_change[i] = 1.25
 
 
     playerY += playerY_change
@@ -133,17 +154,17 @@ while running:
     elif playerY >= 586:
         playerY = 586
 
-    enemyY += enemyY_change
-    enemyX += enemyX_change
-    if enemyX <= 0:
-        enemyX = 1
-    elif enemyX >= 936:
-        enemyX = 935
-    elif enemyY <= 0:
-        enemyY = 1
-    elif enemyY >= 586:
-        enemyY = 585
+    enemyY[i] += enemyY_change[i]
+    enemyX[i] += enemyX_change[i]
+    if enemyX[i] <= 0:
+        enemyX[i] = 1
+    elif enemyX[i] >= 936:
+        enemyX[i] = 935
+    elif enemyY[i] <= 0:
+        enemyY[i] = 1
+    elif enemyY[i] >= 586:
+        enemyY[i] = 585
     player(playerX,playerY)
-    enemy(enemyX,enemyY)
+    enemy(enemyX[i],enemyY[i])
 
     pygame.display.update()
