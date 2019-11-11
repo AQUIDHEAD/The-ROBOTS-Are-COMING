@@ -97,7 +97,12 @@ while running:
             # DOWN RIGHT
             elif event.key == pygame.K_s and event.key == pygame.K_d:
                 playerY_change = 1.75
-                PLayerX_change = 1.75
+                pLayerX_change = 1.75
+            # QUIT KEY
+            elif event.key == pygame.K_p:
+                print("Terminating " + name)
+                running = False
+
 
         elif event.type == pygame.KEYUP:
             playerX_change = 0
@@ -105,32 +110,18 @@ while running:
     
     # Enemy movement
 
-    # LEFT
+    # X-axis movement
     if playerX < enemyX:
         enemyX_change = -1.25
-    elif playerX == enemyX and playerY < enemyY:
-        enemyY_change = -1.25
-    elif playerX == enemyX and playerY > enemyY:
-        enemyY_change = 1.25
-
-    # RIGHT
     elif playerX > enemyX:
         enemyX_change = 1.25
-    
-    # UP
+    # Y-axis movement
     elif playerY < enemyY:
         enemyY_change = -1.25
-    elif playerY == enemyY and playerX < enemyX:
-        enemyX_change = -1.25
-    elif playerY == enemyY and playerX > enemyX:
-        enemyX_change = 1.25
-    
-    # DOWN
     elif playerY > enemyY:
         enemyY_change = 1.25
 
-    # Player function is called
-    
+
     playerY += playerY_change
     playerX += playerX_change
     if playerX <= 0:
