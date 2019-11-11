@@ -2,6 +2,7 @@
 
 import pygame
 import random
+import math
 pygame.init()
 
 
@@ -29,6 +30,7 @@ pygame.display.set_icon(icon)
 
 # Player
 
+player_lifes = 3
 playerImg = pygame.image.load('circle.png')
 playerX = 370
 playerY = 150
@@ -56,6 +58,16 @@ for i in range(num_of_enemies):
 
 def enemy(x,y):
     screen.blit(enemyImg[i],(x,y))
+
+test = False
+
+def isCollision(enemyX,enemyY,playerX,playerY):
+    distance = math.sqrt((math.pow(enemyX - playerY,2)) + (math.pow(enemyY - playerY,2)))
+    if distance < 27:
+        test = True
+    else:
+        test = False
+        print("Its not working!!!!!")
 
 # Game loop for events
 
@@ -141,7 +153,10 @@ while running:
         #    enemyY_change[i] = -1.25
         #elif playerY > enemyY[i]:
         #    enemyY_change[i] = 1.25
-
+        elif test:
+            print("you lost one life")
+            player_lifes -= 1
+            print("only " + player_lifes + " remaining")
 
     playerY += playerY_change
     playerX += playerX_change
@@ -166,5 +181,7 @@ while running:
         enemyY[i] = 585
     player(playerX,playerY)
     enemy(enemyX[i],enemyY[i])
+    collision = isCollision(enemyX[i],enemyY[i],playerX,playerY)
+
 
     pygame.display.update()
