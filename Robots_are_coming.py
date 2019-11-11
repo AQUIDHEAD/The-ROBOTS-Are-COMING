@@ -105,17 +105,29 @@ while running:
     
     # Enemy movement
 
+    # LEFT
     if playerX < enemyX:
         enemyX_change = -1.25
+    elif playerX == enemyX and playerY < enemyY:
+        enemyY_change = -1.25
+    elif playerX == enemyX and playerY > enemyY:
+        enemyY_change = 1.25
+
+    # RIGHT
     elif playerX > enemyX:
         enemyX_change = 1.25
+    
+    # UP
     elif playerY < enemyY:
         enemyY_change = -1.25
+    elif playerY == enemyY and playerX < enemyX:
+        enemyX_change = -1.25
+    elif playerY == enemyY and playerX > enemyX:
+        enemyX_change = 1.25
+    
+    # DOWN
     elif playerY > enemyY:
         enemyY_change = 1.25
-    elif playerX < enemyX and playerY < enemyY:
-        enemyX_change = -1.25
-        enemyY_change = -1.25
 
     # Player function is called
     
