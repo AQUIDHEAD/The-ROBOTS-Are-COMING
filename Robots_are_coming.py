@@ -67,7 +67,6 @@ def isCollision(enemyX,enemyY,playerX,playerY):
         test = True
     else:
         test = False
-        print("Its not working!!!!!")
 
 # Game loop for events
 
@@ -153,7 +152,9 @@ while running:
         #    enemyY_change[i] = -1.25
         #elif playerY > enemyY[i]:
         #    enemyY_change[i] = 1.25
-        elif test:
+        collision = isCollision(enemyX[i],enemyY[i],playerX,playerY)
+
+        if test:
             print("you lost one life")
             player_lifes -= 1
             print("only " + player_lifes + " remaining")
@@ -181,7 +182,6 @@ while running:
         enemyY[i] = 585
     player(playerX,playerY)
     enemy(enemyX[i],enemyY[i])
-    collision = isCollision(enemyX[i],enemyY[i],playerX,playerY)
 
 
     pygame.display.update()
