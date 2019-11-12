@@ -5,7 +5,6 @@ import random
 import math
 pygame.init()
 
-
 # Name of window and game
 
 name = "The Robots Are Coming"
@@ -30,6 +29,7 @@ pygame.display.set_icon(icon)
 
 # Player
 
+player_speed = 2.5
 player_lifes = 3
 playerImg = pygame.image.load('circle.png')
 playerX = 370
@@ -42,6 +42,7 @@ def player(x,y):
 
 # Enemy
 
+enemy_speed = 2.5
 enemyImg = []
 enemyX = []
 enemyY = []
@@ -64,9 +65,9 @@ test = False
 def isCollision(enemyX,enemyY,playerX,playerY):
     distance = math.sqrt((math.pow(enemyX - playerY,2)) + (math.pow(enemyY - playerY,2)))
     if distance < 27:
-        test = True
+        True
     else:
-        test = False
+        False
 
 # Game loop for events
 
@@ -91,32 +92,32 @@ while running:
 
             # UP
             if event.key == pygame.K_w:
-                playerY_change = -1.75
+                playerY_change = -player_speed
             # DOWN
             elif event.key == pygame.K_s:
-                playerY_change = 1.75
+                playerY_change = player_speed
             # LEFT
             elif event.key == pygame.K_a:
-                playerX_change = -1.75
+                playerX_change = -player_speed
             # RIGHT
             elif event.key == pygame.K_d:
-                playerX_change = 1.75
+                playerX_change = player_speed
             # UP LEFT
             elif event.key == pygame.K_w and event.key == pygame.K_a:
-                playerY_change = -1.75
-                PLayerX_change = -1.75
+                playerY_change = -player_speed
+                PLayerX_change = -player_speed
             # UP RIGHT
             elif event.key == pygame.K_w and event.key == pygame.K_d:
-                playerY_change = -1.75
-                PLayerX_change = 1.75
+                playerY_change = -player_speed
+                PLayerX_change = player_speed
             # DOWN LEFT
             elif event.key == pygame.K_s and event.key == pygame.K_a:
-                playerY_change = 1.75
-                PLayerX_change = -1.75
+                playerY_change = player_speed
+                PLayerX_change = -player_speed
             # DOWN RIGHT
             elif event.key == pygame.K_s and event.key == pygame.K_d:
-                playerY_change = 1.75
-                pLayerX_change = 1.75
+                playerY_change = player_speed
+                pLayerX_change = player_speed
             # QUIT KEY
             elif event.key == pygame.K_p:
                 print("Terminating " + name)
@@ -154,7 +155,7 @@ while running:
         #    enemyY_change[i] = 1.25
         collision = isCollision(enemyX[i],enemyY[i],playerX,playerY)
 
-        if test:
+        if collision:
             print("you lost one life")
             player_lifes -= 1
             print("only " + player_lifes + " remaining")
