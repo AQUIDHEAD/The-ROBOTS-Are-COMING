@@ -14,6 +14,7 @@ name = "The Robots Are Coming"
 BLACK    = (   0,   0,   0)
 WHITE    = ( 255, 255, 255)
 GREEN    = (   0, 255,   0)
+GREENISH = ( 50,  190,   0)
 RED      = ( 255,   0,   0)
 BLUE     = (   0,   0, 255)
 
@@ -64,10 +65,11 @@ test = False
 
 def isCollision(enemyX,enemyY,playerX,playerY):
     distance = math.sqrt((math.pow(enemyX - playerY,2)) + (math.pow(enemyY - playerY,2)))
+    return distance
     if distance < 27:
-        True
+        isCollision == True
     else:
-        False
+        isCollision == False
 
 # Game loop for events
 
@@ -77,7 +79,7 @@ while running:
 
     # Drawing the Background
 
-    screen.fill(GREEN)
+    screen.fill(GREENISH)
 
     # For loop for each event
 
@@ -155,10 +157,12 @@ while running:
         #    enemyY_change[i] = 1.25
         collision = isCollision(enemyX[i],enemyY[i],playerX,playerY)
 
-        if collision:
+        if collision == True:
             print("you lost one life")
             player_lifes -= 1
-            print("only " + player_lifes + " remaining")
+            print("only ")
+            print(player_lifes)
+            print(" remaining")
 
     playerY += playerY_change
     playerX += playerX_change
