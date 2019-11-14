@@ -64,12 +64,13 @@ def enemy(x,y):
 test = False
 
 def isCollision(enemyX,enemyY,playerX,playerY):
-    distance = math.sqrt((math.pow(enemyX - playerY,2)) + (math.pow(enemyY - playerY,2)))
-    return distance
-    if distance < 27:
+    distance = math.sqrt((math.pow(playerX - enemyX, 2) + math.pow(playerY - enemyY, 2)))
+    print(distance)
+    if distance < 100.000:
         isCollision == True
     else:
         isCollision == False
+    return distance
 
 # Game loop for events
 
@@ -135,26 +136,16 @@ while running:
         # Y-axis movement
         if playerY < enemyY[i]:
             enemyY_change[i] = -1.25
-# TEST
+
         elif playerX < enemyX[i]:
             enemyX_change[i] = -1.25
 
         elif playerY > enemyY[i]:
             enemyY_change[i] = 1.25
 
-        # TEST
         elif playerX > enemyX[i]:
             enemyX_change[i] = 1.25
-        # X-axis movement
-      #  elif playerX < enemyX[i]:
-       #     enemyX_change[i] = -1.25
-       # elif playerX > enemyX[i]:
-       #     enemyX_change[i] = 1.25
-        # Y-axis movement
-        #elif playerY < enemyY[i]:
-        #    enemyY_change[i] = -1.25
-        #elif playerY > enemyY[i]:
-        #    enemyY_change[i] = 1.25
+
         collision = isCollision(enemyX[i],enemyY[i],playerX,playerY)
 
         if collision == True:
@@ -178,15 +169,15 @@ while running:
     enemyY[i] += enemyY_change[i]
     enemyX[i] += enemyX_change[i]
     if enemyX[i] <= 0:
-        enemyX[i] = 1
+        enemyX[i] = 0
     elif enemyX[i] >= 936:
-        enemyX[i] = 935
+        enemyX[i] = 936
     elif enemyY[i] <= 0:
-        enemyY[i] = 1
+        enemyY[i] = 0
     elif enemyY[i] >= 586:
-        enemyY[i] = 585
+        enemyY[i] = 586
     player(playerX,playerY)
     enemy(enemyX[i],enemyY[i])
 
-
+    # Update the dysplay with the new changes
     pygame.display.update()
